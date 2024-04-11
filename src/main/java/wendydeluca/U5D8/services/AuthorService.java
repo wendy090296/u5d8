@@ -32,42 +32,42 @@ public class AuthorService {
        return authorDAO.findAll(pageable);
     }
 
-    public Author save(AuthorPayload body){
-        if (!authorDAO.existsByEmail(body.getEmail())) {
-            body.setAvatar("https://ui-avatars.com/api/?name=" + body.getName() + "+" + body.getSurname());
-            authorDAO.save(body)
-            return body;
-        } else throw new BadRequestException("Email '" + body.getEmail() + "'  already exists.");
+//    public Author save(AuthorPayload body){
+//        if (!authorDAO.existsByEmail(body.getEmail())) {
+//            body.setAvatar("https://ui-avatars.com/api/?name=" + body.getName() + "+" + body.getSurname());
+//            authorDAO.save(body);
+//            return body;
+//        } else throw new BadRequestException("Email '" + body.getEmail() + "'  already exists.");
+//
+//    }
 
-    }
+//    public Author findById(long id){
+//        Author found = null;
+//        for(Author author: getAll()){
+//            if(author.getId() == id) found = author;
+////            return author;
+//        }
+//        if(found == null) throw new NotFoundException(id);
+//        else return found;
+//    }
 
-    public Author findById(long id){
-        Author found = null;
-        for(Author author: getAll()){
-            if(author.getId() == id) found = author;
-//            return author;
-        }
-        if(found == null) throw new NotFoundException(id);
-        else return found;
-    }
-
-    public Author findByIdAndUpdate(long id, Author updatedAuthor){
-        Author found = null;
-        for(Author author: this.getAll()){
-            if(author.getId() == id) {
-                found = author;
-                found.setName(updatedAuthor.getName());
-                found.setSurname(updatedAuthor.getSurname());
-                found.setEmail(updatedAuthor.getEmail());
-                found.setAvatar(updatedAuthor.getAvatar());
-                found.setDateOfBirth(updatedAuthor.getDateOfBirth());
-
-            }
-        }
-        if(found == null) throw new NotFoundException(id);
-        else return found;
-
-    }
+//    public Author findByIdAndUpdate(long id, Author updatedAuthor){
+//        Author found = null;
+//        for(Author author: this.getAll()){
+//            if(author.getId() == id) {
+//                found = author;
+//                found.setName(updatedAuthor.getName());
+//                found.setSurname(updatedAuthor.getSurname());
+//                found.setEmail(updatedAuthor.getEmail());
+//                found.setAvatar(updatedAuthor.getAvatar());
+//                found.setDateOfBirth(updatedAuthor.getDateOfBirth());
+//
+//            }
+//        }
+//        if(found == null) throw new NotFoundException(id);
+//        else return found;
+//
+//    }
 
     public void findByIdAndDelete(long id){
         Iterator<Author> iterator =getAll().iterator();
