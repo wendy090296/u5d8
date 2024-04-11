@@ -34,7 +34,7 @@ import wendydeluca.U5D8.repositories.BlogPostDAO;
         }
 
         public BlogPost save(BlogPostDTO body){
-            BlogPost newPost = new BlogPost(body.getCategory(), body.getTitle(), body.getContent(), body.getCoverUrl(), body.getTimeOfReading(), authorService.findById(body.getAuthorId()));
+            BlogPost newPost = new BlogPost(body.category(), body.title(), body.content(), body.coverUrl(), body.timeOfReading(), authorService.findById(body.authorId()));
             return blogPostDAO.save(newPost);
 
         }
@@ -45,12 +45,12 @@ import wendydeluca.U5D8.repositories.BlogPostDAO;
 
         public BlogPost findByIdAndUpdate(long id, BlogPostDTO body){
             BlogPost found = this.findById(id);
-            found.setCategory(body.getCategory());
-            found.setTitle(body.getTitle());
-            found.setContent(body.getContent());
-            found.setCoverUrl(body.getCoverUrl());
-            found.setTimeOfReading(body.getTimeOfReading());
-            found.setAuthor(authorService.findById(body.getAuthorId()));
+            found.setCategory(body.category());
+            found.setTitle(body.title());
+            found.setContent(body.content());
+            found.setCoverUrl(body.coverUrl());
+            found.setTimeOfReading(body.timeOfReading());
+            found.setAuthor(authorService.findById(body.authorId()));
             blogPostDAO.save(found);
             return found;
 

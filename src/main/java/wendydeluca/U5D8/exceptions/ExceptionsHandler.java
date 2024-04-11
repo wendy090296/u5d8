@@ -18,14 +18,19 @@ public class ExceptionsHandler {
 
     @ExceptionHandler(BadRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST) // 400
-    public ErrorResponseDTO handleBadRequest(BadRequestException ex){
-        return new ErrorResponseDTO(ex.getMessage(), LocalDateTime.now());
+    public ErrorResponseDTO handleBadRequest(BadRequestException ex) {
+        //if(ex.getErrorsList() != null){
+        //String message = ex.getErrorsList().stream()
+        // .map(objectError -> objectError.getDefaultMessage()
+        //.collect(Collectors.joining(".");
+//    }else..
+    return new ErrorResponseDTO(ex.getMessage(), LocalDateTime.now());
 
     }
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND) //401
-    public ErrorResponseDTO handleNotFound(ChangeSetPersister.NotFoundException ex){
+    public ErrorResponseDTO handleNotFound(NotFoundException ex){
         return new ErrorResponseDTO(ex.getMessage(),LocalDateTime.now());
     }
 

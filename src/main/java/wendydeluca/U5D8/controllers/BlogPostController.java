@@ -1,10 +1,14 @@
 package wendydeluca.U5D8.controllers;
 
+import org.apache.el.util.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import wendydeluca.U5D8.entities.BlogPost;
+import wendydeluca.U5D8.exceptions.BadRequestException;
 import wendydeluca.U5D8.payloads.BlogPostDTO;
 import wendydeluca.U5D8.services.BlogPostsService;
 
@@ -24,7 +28,11 @@ public class BlogPostController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED) //STATUS 201 OK
-    public BlogPost saveBlogPost(@RequestBody BlogPostDTO body){
+    public BlogPost saveBlogPost(@RequestBody  @Validated BlogPostDTO body, BindingResult validation){
+        if(validation.hasErrors()){
+            System.out.println(validation.getAllErrors());
+            throw new BadRequestException(validation.getAllErrors());
+        }
         return blogPostsService.save(body);
     }
 
