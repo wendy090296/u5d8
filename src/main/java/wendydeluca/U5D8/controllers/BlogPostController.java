@@ -5,10 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import wendydeluca.U5D8.entities.BlogPost;
-import wendydeluca.U5D8.payloads.BlogPostPayload;
+import wendydeluca.U5D8.payloads.BlogPostDTO;
 import wendydeluca.U5D8.services.BlogPostsService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/blogPosts")
@@ -20,13 +18,13 @@ public class BlogPostController {
     @GetMapping
     public Page<BlogPost> getAllBlogPosts(@RequestParam(defaultValue = "0") int page,
     @RequestParam(defaultValue = "10") int size,
-    @RequestParam(defaultValue = "name")String sortBy){
+    @RequestParam(defaultValue = "id")String sortBy){
         return blogPostsService.findAll(page,size,sortBy);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED) //STATUS 201 OK
-    public BlogPost saveBlogPost(@RequestBody BlogPostPayload body){
+    public BlogPost saveBlogPost(@RequestBody BlogPostDTO body){
         return blogPostsService.save(body);
     }
 
@@ -37,7 +35,7 @@ public class BlogPostController {
     }
 
     @PutMapping("/{blogPostId}")
-    public BlogPost findBlogPostByIdAndUpdate(@PathVariable long blogPostId, @RequestBody BlogPostPayload body){
+    public BlogPost findBlogPostByIdAndUpdate(@PathVariable long blogPostId, @RequestBody BlogPostDTO body){
         return blogPostsService.findByIdAndUpdate(blogPostId,body);
     }
 

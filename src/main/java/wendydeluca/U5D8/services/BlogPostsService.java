@@ -8,7 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import wendydeluca.U5D8.entities.BlogPost;
 import wendydeluca.U5D8.exceptions.NotFoundException;
-import wendydeluca.U5D8.payloads.BlogPostPayload;
+import wendydeluca.U5D8.payloads.BlogPostDTO;
 
 import wendydeluca.U5D8.repositories.BlogPostDAO;
 
@@ -33,9 +33,9 @@ import wendydeluca.U5D8.repositories.BlogPostDAO;
             return blogPostDAO.findAll(pageable);
         }
 
-        public BlogPost save(BlogPostPayload body){
+        public BlogPost save(BlogPostDTO body){
             BlogPost newPost = new BlogPost(body.getCategory(), body.getTitle(), body.getContent(), body.getCoverUrl(), body.getTimeOfReading(), authorService.findById(body.getAuthorId()));
-            return (BlogPost) blogPostDAO.save(newPost);
+            return blogPostDAO.save(newPost);
 
         }
 
@@ -43,7 +43,7 @@ import wendydeluca.U5D8.repositories.BlogPostDAO;
            return blogPostDAO.findById(id).orElseThrow(()-> new NotFoundException(id));
         }
 
-        public BlogPost findByIdAndUpdate(long id, BlogPostPayload body){
+        public BlogPost findByIdAndUpdate(long id, BlogPostDTO body){
             BlogPost found = this.findById(id);
             found.setCategory(body.getCategory());
             found.setTitle(body.getTitle());

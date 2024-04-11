@@ -8,6 +8,8 @@ public class U5D8Application {
 
 	public static void main(String[] args) {
 
+		System.out.println("hello world");
+
 		SpringApplication.run(U5D8Application.class, args);
 	}
 
